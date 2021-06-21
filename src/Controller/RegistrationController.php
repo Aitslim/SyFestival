@@ -6,11 +6,11 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 // use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+// use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
+// use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -47,9 +47,12 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        if ($this->getUser()) {
+            return $this->render('home/home.html.twig');
+        } else {
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+            ]);
+        }
     }
 }
