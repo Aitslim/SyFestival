@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArtisteController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container my-5">
+
+		<button type="button" class="btn btn-outline-primary">Mélodique</button>
+		<button type="button" class="btn btn-outline-secondary">Industrielle</button>
+		<button type="button" class="btn btn-outline-success">Groovy</button>
+		<button type="button" class="btn btn-outline-info">Deep</button>
+		<button type="button" class="btn btn-outline-warning">Détroit</button>
+	</div>
+
+
+	<div class="row">
+		{% for a in 1..6 %}
+
+			<div class="col-3">
+				<div class="card border-danger mb-3">
+					<div class="card-header">Header</div>
+					<div class="card-body">
+						<h4 class="card-title">Artiste N° :
+							{{ a }}</h4>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<p>
+							<a href="">Découvrir l'artiste</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}
