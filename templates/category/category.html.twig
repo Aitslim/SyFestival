@@ -6,19 +6,21 @@
 {% block body %}
 
 	<div class="container my-5">
+		<div class="d-flex justify-content-center align-items-center">
 
-		<button type="button" class="btn btn-outline-primary">Mélodique</button>
-		<button type="button" class="btn btn-outline-secondary">Industrielle</button>
-		<button type="button" class="btn btn-outline-success">Groovy</button>
-		<button type="button" class="btn btn-outline-info">Deep</button>
-		<button type="button" class="btn btn-outline-warning">Détroit</button>
+			{% for categorie in categories %}
+				<button type="button" class="btn btn-outline-primary">
+					<a href="">{{ categorie.name}}</a>
+				</button>
+
+			{% endfor %}
+
+		</div>
 	</div>
-
 
 	<div class="row">
 		{% for a in 1..6 %}
-
-			<div class="col-3">
+			<div class="col-4">
 				<div class="card border-danger mb-3">
 					<div class="card-header">Header</div>
 					<div class="card-body">

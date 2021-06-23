@@ -23,6 +23,10 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
     {
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -47,12 +51,12 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-        if ($this->getUser()) {
-            return $this->render('home/home.html.twig');
-        } else {
-            return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView(),
-            ]);
-        }
+        // if ($this->getUser()) {
+        //     return $this->render('home/home.html.twig');
+        // } else {
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+        // }
     }
 }

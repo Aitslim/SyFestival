@@ -20,18 +20,18 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
-    private $nameCategory;
+    private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Artiste::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="category")
      */
-    private $artistes;
+    private $artists;
 
     public function __construct()
     {
-        $this->artistes = new ArrayCollection();
+        $this->artists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -39,40 +39,43 @@ class Category
         return $this->id;
     }
 
-    public function getNameCategory(): ?string
+    public function getName(): ?string
     {
-        return $this->nameCategory;
+        return $this->name;
     }
 
-    public function setNameCategory(string $nameCategory): self
+    public function setName(string $name): self
     {
-        $this->nameCategory = $nameCategory;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * @return Collection|Artiste[]
+     * @return Collection|Artist[]
      */
-    public function getArtistes(): Collection
+    public function getArtists(): Collection
     {
-        return $this->artistes;
+        return $this->artists;
     }
 
-    public function addArtiste(Artiste $artiste): self
+    public function addArtist(Artist $artist): self
     {
-        if (!$this->artistes->contains($artiste)) {
-            $this->artistes[] = $artiste;
-            $artiste->addCategory($this);
+        if (!$this->artists->contains($artist)) {
+            $this->artists[] = $artist;
+            $artist->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeArtiste(Artiste $artiste): self
+    public function removeArtist(Artist $artist): self
     {
-        if ($this->artistes->removeElement($artiste)) {
-            $artiste->removeCategory($this);
+        if ($this->artists->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getCategory() === $this) {
+                $artist->setCategory(null);
+            }
         }
 
         return $this;

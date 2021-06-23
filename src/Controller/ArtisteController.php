@@ -2,19 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ArtistRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArtisteController extends AbstractController
 {
     /**
-     * @Route("/artiste", name="artiste")
+     * @Route("/artistes", name="artistes")
      */
-    public function index(): Response
+    public function index(ArtistRepository $artistsRepository): Response
     {
-        return $this->render('artiste/artiste.html.twig', [
-            'controller_name' => 'ArtisteController',
+        $artists = $artistsRepository->findAll();
+        // dd($artists);
+
+        return $this->render('artiste/artistes.html.twig', [
+            'artistes' => $artists,
         ]);
     }
 }
