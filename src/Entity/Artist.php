@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\ArtistRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +20,16 @@ class Artist
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $concert;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="artists")
@@ -52,6 +61,29 @@ class Artist
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getConcert(): ?string
+    {
+        return $this->concert;
+    }
+
+    public function setConcert(string $concert): self
+    {
+        $this->concert = $concert;
 
         return $this;
     }
