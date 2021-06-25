@@ -13,13 +13,17 @@ class ArtisteController extends AbstractController
 {
     /**
      * @Route("/artistes", name="artistes")
+     * @Route("/categorie/{id}", name="categorie", requirements={"id"="\d+"})
      */
     public function index(ArtistRepository $artistsRepository, CategoryRepository $categoryRepository): Response
     {
-        $artistes = $artistsRepository->findAll();
         $categories = $categoryRepository->findAll();
 
-        // dd($categories);
+        if (isset($_GET['id'])) {
+            $artistes = $artistsRepository->findBy(['category' => $_GET['id']]);
+        } else {
+            $artistes = $artistsRepository->findAll();
+        }
 
         return $this->render('artiste/artistes.html.twig', [
             'artistes' => $artistes,
@@ -28,18 +32,13 @@ class ArtisteController extends AbstractController
     }
 
     /**
-     * @Route("/categorie/{id}", name="categorie", requirements={"id"="\d+"})
+     * @Route("/artiste/{id}", name="ficheartiste", requirements={"id"="\d+"})
      */
-    public function artistes($id, ArtistRepository $artistsRepository, CategoryRepository $categoryRepository): Response
+    public function fiche_artiste($id, ArtistRepository $artistsRepository): Response
     {
-        $artistes = $artistsRepository->findByCategory($id);
-        $categories = $categoryRepository->findAll();
-
-        // dd($artistes);
-
-        return $this->render('artiste/artistes.html.twig', [
-            'artistes' => $artistes,
-            'categories' => $categories
+        $artisteDescription = $artistsRepository->findOneBy(['id' => $id]);
+        return $this->render('artiste/ficheartiste.html.twig', [
+            'artiste' => $artisteDescription
         ]);
     }
 

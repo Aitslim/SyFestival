@@ -4,9 +4,7 @@
 	Artistes
 {% endblock %}
 
-{% block stylesheets %}
-	<link href="{{ asset('assets/css/artiste.css') }}" rel="stylesheet"/>
-{% endblock %}
+{% block stylesheets %}{% endblock %}
 
 {% block body %}
 
@@ -17,7 +15,7 @@
 			{% for categorie in categories %}
 
 				<button type="button" class="btn btn-outline-{{ categorie.color }}">
-					<a href="{{ path('categorie', {id: categorie.id}) }}">{{ categorie.name }}</a>
+					<a href="{{ path('artistes', {id: categorie.id}) }}">{{ categorie.name }}</a>
 				</button>
 
 			{% endfor %}
@@ -34,20 +32,17 @@
 
 				<div class="card border-danger mb-3">
 
-					<div class="card-header">
+					<div class="card-header text-end">
 						<span class="badge rounded-pill bg-{{ artiste.concert ? 'secondary' : 'primary' }}">
 							<small>{{ artiste.concert ? 'En concert' : 'Spectacle de rue' }}</small>
 						</span>
 					</div>
-					<div class="card-header">Artiste N° :
-						{{ artiste.id }}
-						-
+					<div class="card-header">Artiste :
 						{{ artiste.name }}
-
 					</div>
 					<div class="card-body">
 						<p class="card-text">{{ artiste.description | u.truncate(150, '...') }}</p>
-						<a href="#" class="card-link">Découvrir l'artiste</a>
+						<a href="{{ path('ficheartiste', {id: artiste.id}) }}" class="card-link">Découvrir l'artiste</a>
 
 					</div>
 				</div>

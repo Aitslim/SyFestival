@@ -23,13 +23,13 @@ class ArtistRepository extends ServiceEntityRepository
      * @return Artist[] Returns an array of Artist objects
      */
 
-    public function findByCategory(int $value)
+    public function findByCategory(int $id)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.category = :val')
-            ->setParameter('val', $value)
+            ->where('a.category = :val')
+            ->setParameter('val', $id)
             ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
