@@ -37,6 +37,7 @@ class ArtisteController extends AbstractController
     public function fiche_artiste($id, ArtistRepository $artistsRepository): Response
     {
         $artisteDescription = $artistsRepository->findOneBy(['id' => $id]);
+    
         return $this->render('artiste/ficheartiste.html.twig', [
             'artiste' => $artisteDescription
         ]);
