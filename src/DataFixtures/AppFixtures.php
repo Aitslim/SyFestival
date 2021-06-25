@@ -23,8 +23,15 @@ class AppFixtures extends Fixture
         $faker = \Faker\Factory::create('fr_FR');
 
         // create 2 Users !
+        // Users 1
         $user = new User();
         $user->setEmail('toto1@gmail.com')
+            ->setPassword($this->passwordencoder->encodePassword($user, 'toto123456'));
+        $manager->persist($user);
+
+        // User 2
+        $user = new User();
+        $user->setEmail('toto2@gmail.com')
             ->setPassword($this->passwordencoder->encodePassword($user, 'toto123456'));
         $manager->persist($user);
 
@@ -51,6 +58,7 @@ class AppFixtures extends Fixture
                     $artiste->setConcert($concert);
                     $concert++;
                 }
+
                 $manager->persist($artiste);
             }
         }

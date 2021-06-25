@@ -28,9 +28,11 @@
 
 		{% for artiste in artistes %}
 
-			<div class="col-4">
+			<div
+				class="col-4">
 
-				<div class="card border-danger mb-3">
+				{# <div class="card border-success mb-3"> #}
+				<div class="card border-{{ artiste.category ? artiste.category.color : 'dark' }} mb-3">
 
 					<div class="card-header text-end">
 						<span class="badge rounded-pill bg-{{ artiste.concert ? 'secondary' : 'primary' }}">
@@ -40,8 +42,12 @@
 					<div class="card-header">Artiste :
 						{{ artiste.name }}
 					</div>
-					<div class="card-body">
-						<p class="card-text">{{ artiste.description | u.truncate(150, '...') }}</p>
+					<div
+						class="card-body">
+						{# <p class="card-text">{{ artiste.description | u.truncate(150, '...') }}</p> #}
+						<p class="card-text">{{ artiste.description | slice(1, 150) }}
+							'...'
+						</p>
 						<a href="{{ path('ficheartiste', {id: artiste.id}) }}" class="card-link">Découvrir l'artiste</a>
 
 					</div>
