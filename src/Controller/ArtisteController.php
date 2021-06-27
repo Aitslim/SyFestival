@@ -25,20 +25,20 @@ class ArtisteController extends AbstractController
             $artistes = $artistsRepository->findAll();
         }
 
-        return $this->render('artiste/artistes.html.twig', [
+        return $this->render('artiste/liste.html.twig', [
             'artistes' => $artistes,
             'categories' => $categories
         ]);
     }
 
     /**
-     * @Route("/artiste/{id}", name="ficheartiste", requirements={"id"="\d+"})
+     * @Route("/artiste/{id}", name="artiste", requirements={"id"="\d+"})
      */
-    public function fiche_artiste($id, ArtistRepository $artistsRepository): Response
+    public function artiste($id, ArtistRepository $artistsRepository): Response
     {
         $artisteDescription = $artistsRepository->findOneBy(['id' => $id]);
-    
-        return $this->render('artiste/ficheartiste.html.twig', [
+
+        return $this->render('artiste/fiche.html.twig', [
             'artiste' => $artisteDescription
         ]);
     }
@@ -48,8 +48,20 @@ class ArtisteController extends AbstractController
      */
     public function agenda(): Response
     {
+        $agenda = array(
+            array("20/08/21", "16h - 18h", "Réserver"),
+            array("20/08/21", "18h - 20h", "Réserver"),
+            array("20/08/21", "21h - 23h", "Réserver"),
+            array("21/08/21", "16h - 18h", "Réserver"),
+            array("21/08/21", "18h - 20h", "Réserver"),
+            array("21/08/21", "21h - 23h", "Réserver"),
+            array("22/08/21", "16h - 18h", "Réserver"),
+            array("22/08/21", "18h - 20h", "Réserver"),
+            array("22/08/21", "21h - 23h", "Réserver")
+        );
+
         return $this->render('artiste/agenda.html.twig', [
-            'agenda' => "agenda",
+            'agenda' => $agenda,
         ]);
     }
 }

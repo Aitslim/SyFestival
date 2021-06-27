@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +42,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
+     */
+    private $concert;
+
+    public function __construct()
+    {
+        $this->concert = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -133,4 +145,34 @@ class User implements UserInterface
 
         return $this;
     }
+
+    // /**
+    //  * @return Collection|Reservation[]
+    //  */
+    // public function getConcert(): Collection
+    // {
+    //     return $this->concert;
+    // }
+
+    // public function addConcert(Reservation $concert): self
+    // {
+    //     if (!$this->concert->contains($concert)) {
+    //         $this->concert[] = $concert;
+    //         $concert->setUser($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeConcert(Reservation $concert): self
+    // {
+    //     if ($this->concert->removeElement($concert)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($concert->getUser() === $this) {
+    //             $concert->setUser(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
 }

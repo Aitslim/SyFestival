@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!
+{% endblock %}
+
+{% block body %}
+	<form class="mb-5" method="POST" action="">
+		<fieldset>
+			<legend>Réservation</legend>
+			<div class="form-group has-danger">
+				<label for="lastname" class="form-label mt-2">Nom :
+				</label>
+				<input type="text" name="lastname" class="form-control <?= (isset($erreur[" lastname"])) ? 'is-invalid' : '' ?>" id="lastname" aria-describedby="lastnameHelp" value="<?= ($_POST) ? $_POST["lastname"] : "" ?>" placeholder="Enter votre nom" required="">
+				<div class="invalid-feedback"><?= $erreur["lastname"] ?></div>
+			</div>
+			<div class="form-group">
+				<label for="firstname" class="form-label mt-2">Prénom :
+				</label>
+				<input
+				type="text" name="firstname" class="form-control <?= (isset($erreur[" firstname"])) ? 'is-invalid' : '' ?>" id="firstname" aria-describedby="firstnameHelp" value="<?= ($_POST) ? $_POST["firstname"] : "" ?>" placeholder="Enter votre prénom" required="">
+				<!-- <div class="invalid-feedback">Veuillez entrer un Prénom complet</div> -->
+				<div class="invalid-feedback"><?= $erreur["firstname"] ?></div>
+			</div>
+
+			<div class="form-group">
+				<label for="phone" class="form-label mt-2">Téléphone :
+				</label>
+				<input type="tel" name="phone" class="form-control <?= (isset($erreur[" phone"])) ? 'is-invalid' : '' ?>" id="phone" aria-describedby="phoneHelp" value="<?= ($_POST) ? $_POST["phone"] : "" ?>" placeholder="0123456789" required="">
+				<div class="invalid-feedback"><?= $erreur["phone"] ?></div>
+			</div>
+			<div class="form-group">
+				<label for="exampleSelect1" class="form-label mt-4">Example select</label>
+				<select class="form-select" id="exampleSelect1">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Valider</button>
+		</fieldset>
+	</form>
+{% endblock %}

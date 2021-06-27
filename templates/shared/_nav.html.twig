@@ -18,10 +18,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path('artistes') }}">Artistes</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Billeterie</a>
-				</li>
-
+				{% if app.user %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('reservation') }}">Billeterie</a>
+					</li>
+				{% endif %}
 				{% if not app.user %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
