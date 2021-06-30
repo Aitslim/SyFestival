@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Artist;
+// use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
+use App\Repository\ConcertRepository;
+// use Symfony\Component\Mailer\MailerInterface;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,22 +48,34 @@ class ArtisteController extends AbstractController
     /**
      * @Route("/agenda", name="agenda")
      */
-    public function agenda(): Response
+    public function agenda(ArtistRepository $artistsRepository): Response
     {
+        $artists = $artistsRepository->findWithConcert();
+        // dd($artists);
+
         $agenda = array(
-            array("20/08/21", "16h - 18h", "Réserver"),
-            array("20/08/21", "18h - 20h", "Réserver"),
-            array("20/08/21", "21h - 23h", "Réserver"),
-            array("21/08/21", "16h - 18h", "Réserver"),
-            array("21/08/21", "18h - 20h", "Réserver"),
-            array("21/08/21", "21h - 23h", "Réserver"),
-            array("22/08/21", "16h - 18h", "Réserver"),
-            array("22/08/21", "18h - 20h", "Réserver"),
-            array("22/08/21", "21h - 23h", "Réserver")
+            array("20/08/21", "16h - 18h"),
+            array("20/08/21", "18h - 20h"),
+            array("20/08/21", "21h - 23h"),
+            array("21/08/21", "16h - 18h"),
+            array("21/08/21", "18h - 20h"),
+            array("21/08/21", "21h - 23h"),
+            array("22/08/21", "16h - 18h"),
+            array("22/08/21", "18h - 20h"),
+            array("22/08/21", "21h - 23h")
         );
+
+        $i = 0;
+        foreach ($artists as $artist) {
+            $agenda[$i][] = $artist->getName();
+            $agenda[$i][] = $artist->getId();
+
+            $i++;
+        };
 
         return $this->render('artiste/agenda.html.twig', [
             'agenda' => $agenda,
         ]);
     }
+
 }

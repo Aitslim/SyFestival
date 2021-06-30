@@ -14,6 +14,8 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
+        // Si acces depuis l'URL !        
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }

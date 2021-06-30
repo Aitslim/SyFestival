@@ -19,22 +19,14 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
-    // /**
-    //  * @return Artist[] Returns an array of Artist objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findWithConcert()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.concert IS NOT NULL')
+            ->orderBy('p.concert', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Artist

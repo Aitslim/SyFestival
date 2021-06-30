@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ConcertRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FestivalController extends AbstractController
 {
@@ -15,6 +16,18 @@ class FestivalController extends AbstractController
     {
         return $this->render('home/home.html.twig', [
             'controller_name' => 'FestivalController',
+        ]);
+    }
+
+    /**
+     * @Route("/agenda2", name="agenda2")
+     */
+    public function agenda2(ConcertRepository $concertRepository): Response
+    {
+        $agenda = $concertRepository->findAll();
+
+        return $this->render('artiste/agenda2.html.twig', [
+            'agenda' => $agenda,
         ]);
     }
 }

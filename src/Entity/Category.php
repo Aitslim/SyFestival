@@ -25,7 +25,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $color;
 
@@ -55,6 +55,7 @@ class Category
 
         return $this;
     }
+
     public function getColor(): ?string
     {
         return $this->color;
