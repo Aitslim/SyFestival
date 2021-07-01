@@ -20,13 +20,13 @@ class FestivalController extends AbstractController
     }
 
     /**
-     * @Route("/agenda2", name="agenda2")
+     * @Route("/agenda", name="agenda")
      */
-    public function agenda2(ConcertRepository $concertRepository): Response
+    public function agenda(ConcertRepository $concertRepository): Response
     {
         $agenda = $concertRepository->findAll();
 
-        return $this->render('artiste/agenda2.html.twig', [
+        return $this->render('artiste/agenda.html.twig', [
             'agenda' => $agenda,
         ]);
     }

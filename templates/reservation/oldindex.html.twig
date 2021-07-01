@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationController!
+{% endblock %}
+
+{% block body %}
+	<!-- Main Content -->
+	<div class="container">
+		<div class="col-lg-8 col-md-10 mx-auto">
+			<h1>Saisie d'une réservation</h1>
+			{# {{ form(form) }} #}
+			{{ form_start(form) }}
+			<div class="my-custom-class-for-errors">
+				{{ form_errors(form) }}
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form_row(form.task) }}
+				</div>
+				<div class="col" id="some-custom-id">
+					{{ form_row(form.dueDate) }}
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

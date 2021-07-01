@@ -13,6 +13,8 @@ class ArtistController extends AbstractController
     /**
      * @Route("/artistes", name="artistes")
      * @Route("/categorie/{id}", name="categorie", requirements={"id"="\d+"})
+     * @Route("/reservation/{id}", name="reservation", requirements={"id"="\d+"})
+     * @Route("/billeterie", name="billeterie")
      */
     public function index(ArtistRepository $artistsRepository, CategoryRepository $categoryRepository): Response
     {

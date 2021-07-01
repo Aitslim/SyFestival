@@ -9,6 +9,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					{# <tr class="table-dark"> #}
 					<th scope="col">Date</th>
 					<th scope="col">Heure</th>
 					<th scope="col">Artiste</th>
@@ -19,14 +20,13 @@
 
 				{% for ligne in agenda %}
 					<tr>
-						<td>{{ ligne.dateconcert | date("d/m/Y") }}</td>
-						<td>{{ ligne.HeureDebut | date("H") }} h- {{ ligne.HeureFin | date("H") }} h</td>
-						<td>{{ ligne.artist.name }}</td>
+						{% for colonne in ligne %}
+							<td>{{ colonne }}</td>
+						{% endfor %}
 						<td>
-							{# <a href="{{ path('reservation', {id: app.user.id}) }}"> #}
-							{# <a href="{{ path('reservation') }}"> #}
+							<a href="{{ path('artistes') }}">
 								<button type="button" class="btn btn-primary">Réserver</button>
-							{# </a> #}
+							</a>
 						</td>
 					</tr>
 				{% endfor %}
