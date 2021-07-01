@@ -27,7 +27,7 @@
 						<td>{{ ligne.artist.name }}</td>
 						<td>
 							<a href="{{ path('reservation', {id: ligne.id}) }}">
-								<button type="button" class="btn btn-primary">Réserver</button>
+								<button type="button" class="btn btn-class btn-outline-{{ ligne.artist.category.color }}">Réserver</button>
 							</a>
 						</td>
 					</tr>

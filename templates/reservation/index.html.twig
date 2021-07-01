@@ -1,33 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!
+{% block title %}Reservation
 {% endblock %}
 
 {% block body %}
 	{# <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> #}
 	<main>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4">Dashboard</h1>
-			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active">Dashboard</li>
-			</ol>
 			<a href="{{ path('reservation_add') }}" class="btn btn-primary">Ajouter</a>
 			<!-- Data Table -->
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1"></i>
-					DataTable Example
+					Réservations
 				</div>
 				<div class="card-body">
-					<table id="datatablesSimple">
-
-						{% for reservation in reservations %}
+					<table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+						<thead>
 							<tr>
-								<td>{{ reservation.nom }}</td>
-								<td>{{ reservation.prenom }}</td>
+								<th scope="col">Nom</th>
+								<th scope="col">Prénom</th>
+								<th scope="col">Places</th>
+								<th scope="col">Date</th>
+								<th scope="col">Heure</th>
+								<th scope="col">Artiste</th>
 							</tr>
-						{% endfor %}
+						</thead>
+						<tbody>
 
+							{% for resa in reservations %}
+								{# <tr class="table-{{ resa.concert.artist.category.color}}"></tr> #}
+								<tr>
+									<td>{{ resa.nom }}</td>
+									<td>{{ resa.prenom }}</td>
+									<td>{{ resa.places }}</td>
+									<td>{{ resa.concert.dateconcert | date("d/m/Y") }}</td>
+									<td>{{ resa.concert.heuredebut | date("H") }}
+										h-
+										{{ resa.concert.heurefin | date("H") }}
+										h</td>
+									<td>{{ resa.concert.artist.name }}</td>
+								</tr>
+							{% endfor %}
+
+						</tbody>
 					</table>
 				</div>
 			</div>

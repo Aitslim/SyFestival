@@ -17,9 +17,11 @@ class ReservationController extends AbstractController
      */
     public function index(ReservationRepository $reservationRepository): Response
     {
-        $reservation = $reservationRepository->findAll();
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
-        // dd($reservation);
+        $reservation = $reservationRepository->findBy(['user' => $this->getUser()]);
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservation,
@@ -35,13 +37,8 @@ class ReservationController extends AbstractController
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
-        // dd($reservation);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation->setUser($this->getUser());
-
-            dd($reservation);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
@@ -49,8 +46,6 @@ class ReservationController extends AbstractController
 
             return $this->redirectToRoute('reservation');
         }
-
-        // dd($reservation);
 
         return $this->render('/reservation/add.html.twig', [
             'form' => $form->createView(),
