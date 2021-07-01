@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,23 +17,30 @@ class ReservationController extends AbstractController
      */
     public function index(ReservationRepository $reservationRepository): Response
     {
+        $reservation = $reservationRepository->findAll();
+
+        // dd($reservation);
+
         return $this->render('reservation/index.html.twig', [
-            'reservation' => $reservationRepository->findAll(),
+            'reservations' => $reservation,
         ]);
     }
 
     /**
-     * @Route("/Reservation/add", name="Reservation_add")
+     * @Route("/reservation/add", name="reservation_add")
      */
     public function addReservation(Request $request): Response
     {
         $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $Resreservationervation);
+        $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
+        // dd($reservation);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($reservation);
             $reservation->setUser($this->getUser());
+
+            dd($reservation);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
@@ -42,8 +50,9 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('reservation');
         }
 
-        // ici add
-        return $this->render('/Reservation/index.html.twig', [
+        // dd($reservation);
+
+        return $this->render('/reservation/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
