@@ -19,14 +19,14 @@
 
 				{% for ligne in agenda %}
 					<tr>
-						<td>{{ ligne.dateconcert | date("m/d/Y") }}</td>
+						<td>{{ ligne.dateconcert | date("d/m/Y") }}</td>
 						<td>{{ ligne.HeureDebut | date("H") }} h- {{ ligne.HeureFin | date("H") }} h</td>
 						<td>{{ ligne.artist.name }}</td>
 						<td>
 							{# <a href="{{ path('reservation', {id: app.user.id}) }}"> #}
-							<a href="{{ path('reservation') }}">
+							{# <a href="{{ path('reservation') }}"> #}
 								<button type="button" class="btn btn-primary">Réserver</button>
-							</a>
+							{# </a> #}
 						</td>
 					</tr>
 				{% endfor %}

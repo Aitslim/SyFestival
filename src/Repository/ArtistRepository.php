@@ -19,6 +19,15 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
+    public function findWithConcert()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.enconcert IS NOT NULL')
+             ->orderBy('p.enconcert', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Artist[] Returns an array of Artist objects
     //  */

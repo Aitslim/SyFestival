@@ -25,20 +25,20 @@ class AppFixtures extends Fixture
         // create 2 Users !
         // Users 1
         $user = new User();
-        $user->setEmail('toto1@gmail.com')
+        $user->setEmail('toto7@gmail.com')
             ->setPassword($this->passwordencoder->encodePassword($user, 'toto123456'));
         $manager->persist($user);
 
         // User 2
         $user = new User();
-        $user->setEmail('toto2@gmail.com')
+        $user->setEmail('toto8@gmail.com')
             ->setPassword($this->passwordencoder->encodePassword($user, 'toto123456'));
         $manager->persist($user);
 
         // create 5 Categorie !
         $categorieName = ['Mélodique', 'Industrielle', 'Groovy', 'Deep', 'Détroit'];
         $categorieColor = ['primary', 'secondary', 'success', 'info', 'warning'];
-        $concert = 1;
+        $enconcert = 1;
 
         for ($i = 0; $i <= 4; $i++) {
             $category = new Category();
@@ -54,9 +54,9 @@ class AppFixtures extends Fixture
                     ->setDescription($faker->paragraphs(10, true))
                     ->setCategory($category);
 
-                if ($concert <= 9 && rand(0, 5) <= 2) {
-                    $artiste->setConcert($concert);
-                    $concert++;
+                if ($enconcert <= 9 && rand(0, 5) <= 2) {
+                    $artiste->setEnconcert($enconcert);
+                    $enconcert++;
                 }
 
                 $manager->persist($artiste);
