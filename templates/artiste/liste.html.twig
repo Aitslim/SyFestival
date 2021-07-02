@@ -15,7 +15,7 @@
 			{% for categorie in categories %}
 
 				<button type="button" class="btn btn-outline-{{ categorie.color }}">
-					<a href="{{ path('artistes', {id: categorie.id}) }}">{{ categorie.name }}</a>
+					<a href="{{ path('artistes_list', {id: categorie.id}) }}">{{ categorie.name }}</a>
 				</button>
 
 			{% endfor %}
@@ -44,7 +44,7 @@
 						<p class="card-text">{{ artiste.description | slice(1, 150) }}
 							'...'
 						</p>
-						<a href="{{ path('artiste', {id: artiste.id}) }}" class="card-link">Découvrir l'artiste</a>
+						<a href="{{ path('artiste_fiche', {id: artiste.id}) }}" class="card-link">Découvrir l'artiste</a>
 
 					</div>
 				</div>

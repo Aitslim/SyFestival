@@ -51,6 +51,7 @@ class Concert
 
     public function __toString()
     {
+        // A REVOIR : comment revoyer la liste des concerts.
         return (string) $this->id;
     }
 

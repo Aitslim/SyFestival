@@ -15,6 +15,8 @@ class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // A REVOIR : comment inclure la liste des concerts dans le formulaire.
+
         $builder
             ->add('nom', TextType::class, [
                 "label" => "Nom",
@@ -22,8 +24,12 @@ class ReservationType extends AbstractType
             ->add('prenom', TextType::class, [
                 "label" => "Prénom",
             ])
-            ->add('telephone')
-            ->add('places')
+            ->add('telephone', TextType::class, [
+                "label" => "Téléphone",
+            ])
+            ->add('places', TextType::class, [
+                "label" => "Nb. de places",
+            ])
             ->add('concert', EntityType::class, [
                 'class' => Concert::class
             ])

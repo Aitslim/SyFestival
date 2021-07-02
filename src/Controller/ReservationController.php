@@ -17,9 +17,9 @@ class ReservationController extends AbstractController
      */
     public function index(ReservationRepository $reservationRepository): Response
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
+        // if (!$this->getUser()) {
+        //     return $this->redirectToRoute('app_login');
+        // }
 
         $reservation = $reservationRepository->findBy(['user' => $this->getUser()]);
 

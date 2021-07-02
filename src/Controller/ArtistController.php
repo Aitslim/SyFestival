@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ArtistRepository;
 use App\Repository\CategoryRepository;
+// use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,15 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArtistController extends AbstractController
 {
     /**
-     * @Route("/artistes", name="artistes")
-     * @Route("/categorie/{id}", name="categorie", requirements={"id"="\d+"})
+     * @Route("/artistes/{id}", name="artistes_list")
      */
-    public function index(ArtistRepository $artistsRepository, CategoryRepository $categoryRepository): Response
+    public function list(int $id = null, ArtistRepository $artistsRepository, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
 
-        if (isset($_GET['id'])) {
-            $artistes = $artistsRepository->findBy(['category' => $_GET['id']]);
+        if ($id) {
+            $artistes = $artistsRepository->findBy(['category' => $id]);
         } else {
             $artistes = $artistsRepository->findAll();
         }
@@ -31,7 +31,7 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * @Route("/artiste/{id}", name="artiste", requirements={"id"="\d+"})
+     * @Route("/fiche/{id}", name="artiste_fiche", requirements={"id"="\d+"})
      */
     public function artiste($id, ArtistRepository $artistsRepository): Response
     {
