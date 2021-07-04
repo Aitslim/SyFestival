@@ -17,9 +17,10 @@ class ReservationController extends AbstractController
      */
     public function index(ReservationRepository $reservationRepository): Response
     {
-        // if (!$this->getUser()) {
-        //     return $this->redirectToRoute('app_login');
-        // }
+        // A REVOIR : provoque une exception, msg = "Access Denied" sans la condition ci-dessous !.
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $reservation = $reservationRepository->findBy(['user' => $this->getUser()]);
 

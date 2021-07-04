@@ -16,7 +16,6 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // A REVOIR : comment inclure la liste des concerts dans le formulaire.
-
         $builder
             ->add('nom', TextType::class, [
                 "label" => "Nom",
