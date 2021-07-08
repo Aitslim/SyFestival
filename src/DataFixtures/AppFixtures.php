@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
             for ($j = 0; $j <= rand(3, 8); $j++) {
 
                 $artiste = new Artist();
-                $artiste->setName($faker->firstname())
+                $artiste->setName('Dj ' . $faker->firstname())
                     ->setDescription($faker->paragraphs(10, true))
                     ->setCategory($category);
 

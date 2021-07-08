@@ -8,9 +8,7 @@
 		</title>
 
 		<link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css">
-		<link href="{{ asset('assets/css/header.css') }}" rel="stylesheet" type="text/css">
-		{% block stylesheets %}
-		{% endblock %}
+		<link href="{{ asset('assets/css/header.css') }}" rel="stylesheet" type="text/css"> {% block stylesheets %}{% endblock %}
 
 		{% block javascripts %}
 			{#{{ encore_entry_script_tags('app') }}#}
@@ -21,8 +19,7 @@
 		{% include "shared/_header.html.twig" %}
 		{% include "shared/_nav.html.twig" %}
 
-		<div class="container my-5"> 
-			{% block body %}{% endblock %}
-		</div>
-	</body>
-</html>
+		<div class="container my-5"> {% block body %}{% endblock %}
+			</div>
+		</body>
+	</html>

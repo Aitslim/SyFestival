@@ -40,6 +40,20 @@
 										{{ resa.concert.heurefin | date("H") }}
 										h</td>
 									<td>{{ resa.concert.artist.name }}</td>
+									<td>
+										<a href="{{ path('reservation_remove', {id: resa.id}) }}">
+											<button type="button" class="btn btn-class btn-outline-danger">
+												supprimer
+											</button>
+										</a>
+									</td>
+									<td>
+										<a href="{{ path('reservation_update', {id: resa.id}) }}">
+											<button type="button" class="btn btn-class btn-outline-primary">
+												Modifier
+											</button>
+										</a>
+									</td>
 								</tr>
 							{% endfor %}
 

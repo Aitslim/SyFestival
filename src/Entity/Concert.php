@@ -52,7 +52,12 @@ class Concert
     public function __toString()
     {
         // A REVOIR : comment revoyer la liste des concerts.
-        return (string) $this->id;
+        $ligne =  (string) $this->id . " - " . date_format($this->dateconcert, 'd-m-Y') . " - ";
+        $ligne .= (string) date_format($this->heuredebut, 'H') . "h-" . date_format($this->heurefin, 'H') . "h";
+        $ligne .= (string) "  -->  DJ. " . $this->artist->getName();
+        $ligne .= (string) "  --> " . $this->artist->getCategory()->getName();
+
+        return $ligne;
     }
 
     public function getId(): ?int
